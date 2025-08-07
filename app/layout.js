@@ -17,34 +17,36 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/logo-text.png" sizes="any" />
       </head>
-      <body className={`${inter.className}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ClerkProvider
-            publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-            appearance={{
-              baseTheme: shadesOfPurple,
-            }}
+      <body>
+        <div className={`${inter.className}`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
           >
-            <ConvexClientProvider>
-              <Header />
-              <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
-                <FloatingShapes />
-                <Toaster richColors />
+            <ClerkProvider
+              publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+              appearance={{
+                baseTheme: shadesOfPurple,
+              }}
+            >
+              <ConvexClientProvider>
+                <Header />
+                <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
+                  <FloatingShapes />
+                  <Toaster richColors />
 
-                {children}
-              </main>
-            </ConvexClientProvider>
-          </ClerkProvider>
-        </ThemeProvider>
+                  {children}
+                </main>
+              </ConvexClientProvider>
+            </ClerkProvider>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );
